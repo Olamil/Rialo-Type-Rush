@@ -1,83 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Rialo Type Rush</title>
+  <meta charset="UTF-8" />
+  <title>Rialo Typing Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="top">
-    <div class="brand">
-      <!-- simple inline Rialo-like logo placeholder -->
-      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" aria-hidden>
-        <rect x="1" y="1" width="22" height="22" rx="5" fill="#021216"/>
-        <circle cx="12" cy="12" r="6" fill="#5BE0C3"/>
-      </svg>
-      <div>
-        <h1>Rialo Type Rush</h1>
-        <div class="subtitle">Fast. Focused. Web3 words.</div>
-      </div>
-    </div>
+  <h1>Rialo Typing Game</h1>
+  
+  <div id="time-buttons">
+    <button onclick="setTime(15)">15s</button>
+    <button onclick="setTime(30)">30s</button>
+    <button onclick="setTime(60)">60s</button>
+  </div>
 
-    <div class="controls">
-      <button id="connectBtn" class="btn">Connect Wallet</button>
-      <div id="addr" class="addr hidden"></div>
-    </div>
-  </header>
-
-  <main class="stage">
-    <section class="panel game-panel">
-      <div id="hud">
-        <div id="score">Score: 0</div>
-        <div id="lives">Lives: 3</div>
-        <div id="streak">Streak: 0</div>
-      </div>
-
-      <div class="play-area">
-        <div id="wordBox" class="word">ready</div>
-        <input id="typeInput" class="type-input" placeholder="Type the word..." autocomplete="off" />
-        <div class="timer-wrap">
-          <div id="timerBar" class="timer-bar"></div>
-        </div>
-
-        <div id="message" class="message"></div>
-
-        <div class="buttons">
-          <button id="startBtn" class="btn primary">Start</button>
-          <button id="skipBtn" class="btn" disabled>Skip (penalty)</button>
-          <button id="submitBtn" class="btn" disabled>Submit Score</button>
-        </div>
-      </div>
-    </section>
-
-    <aside class="panel side-panel">
-      <div class="section">
-        <h3>How to play</h3>
-        <ol>
-          <li>Press <strong>Start</strong>.</li>
-          <li>Type the shown Rialo/Web3 word before the timer ends.</li>
-          <li>Each correct word = +10 points (+streak bonus).</li>
-          <li>3 lives — when lives = 0 game over.</li>
-        </ol>
-      </div>
-
-      <div class="section leaderboard">
-        <div class="section-head">
-          <h3>Leaderboard (local)</h3>
-          <button id="clearLb" class="btn small">Clear</button>
-        </div>
-        <div id="leaderboardList">No scores yet — be the first.</div>
-      </div>
-
-      <div class="section">
-        <h3>Rialo Words</h3>
-        <div class="words-sample">bridge · event · datachain · trigger · wallet · validator · onboarding</div>
-      </div>
-    </aside>
-  </main>
-
-  <footer class="footer">Made by <strong>YourName</strong> — Support for Rialo</footer>
+  <div id="word"></div>
+  <input type="text" id="input" disabled placeholder="Type here..." />
+  
+  <div id="score">Score: 0</div>
+  <div id="time">Time: 0</div>
+  
+  <button id="start-btn" onclick="startGame()">Start Game</button>
+  <button id="restart-btn" onclick="restartGame()" style="display:none;">Play Again</button>
 
   <script src="script.js"></script>
 </body>
