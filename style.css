@@ -1,50 +1,90 @@
-:root{
-  --bg:#061221;
-  --card:#07161a;
-  --accent:#5be0c3;
-  --muted:#89a6a2;
-  --text:#e6f6f2;
-  --danger:#ff6b6b;
+const rialoWords = [
+  "rialo","rialoverse","rialochain","rialowallet","rialobridge","rialoscan","rialotx","rialocredits","rialopass","rialobuilder",
+  "rialofriends","rialoairdrop","rialodev","rialotreasury","rialoguild","rialospace","rialohub","rialonetwork","rialoalpha","rialocore",
+  "rialostake","rialopool","rialofund","rialobase","rialogrow","rialodrop","rialotool","rialogm","rialogn","rialonft","rialomint",
+  "rialoswap","rialobridgein","rialobridgeout","buildonrialo","rialobuilderdao","rialobull","rialobear","rialorelay","rialonode",
+  "rialohash","rialoblock","rialomodule","rialorollup","rialoproof","rialosign","rialoconnect","rialopower","rialolink","rialospeed","rialosig","rialosquad"
+];
+
+const web3Words = [
+  "blockchain","onchain","wallet","address","transaction","token","mint","bridge","layer1","layer2","gas",
+  "smartcontract","validator","hash","node","block","network","protocol","mainnet","testnet","faucet","explorer",
+  "airdrop","staking","yield","defi","dapp","dao","multisig","signature","zk","proof","evm","gasless","signer",
+  "liquidity","stablecoin","swap","pool","tokenomics","governance","rollup","sequencer","walletconnect","metamask",
+  "rpc","chainid","builder","permissionless","composability","wagmi","hodl"
+];
+
+let words = [];
+let currentWord;
+let score = 0;
+let time = 0;
+let timerInterval;
+
+const wordEl = document.getElementById('word');
+const input = document.getElementById('input');
+const scoreEl = document.getElementById('score');
+const timeEl = document.getElementById('time');
+const startBtn = document.getElementById('start-btn');
+const restartBtn = document.getElementById('restart-btn');
+
+function setTime(seconds) {
+  time = seconds;
+  timeEl.textContent = `Time: ${time}`;
 }
 
-*{box-sizing:border-box;font-family:Inter,system-ui,Arial,sans-serif}
-html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#03121a);color:var(--text)}
-.top{display:flex;justify-content:space-between;align-items:center;padding:16px 28px}
-.brand{display:flex;gap:12px;align-items:center}
-.brand h1{margin:0;font-size:1.1rem}
-.subtitle{font-size:0.85rem;color:var(--muted)}
-.controls{display:flex;gap:10px;align-items:center}
-.btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;color:var(--text);cursor:pointer}
-.btn.primary{background:var(--accent);color:#001316;border:none}
-.btn.small{padding:6px 8px;font-size:12px}
-.addr{padding:6px 10px;background:rgba(255,255,255,0.03);border-radius:8px;font-family:monospace}
-.hidden{display:none}
+function startGame() {
+  score = 0;
+  words = shuffle([...rialoWords, ...web3Words]);
+  input.value = '';
+  input.disabled = false;
+  input.focus();
+  scoreEl.textContent = `Score: 0`;
+  setTime(time || 30);
+  nextWord();
+  clearInterval(timerInterval);
+  timerInterval = setInterval(updateTime, 1000);
+  startBtn.style.display = 'none';
+  restartBtn.style.display = 'none';
+}
 
-.stage{display:flex;gap:18px;max-width:1100px;margin:22px auto;padding:0 18px}
-.panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.6)}
-.game-panel{flex:1;display:flex;flex-direction:column;align-items:center}
-.side-panel{width:320px;display:flex;flex-direction:column;gap:12px}
-.play-area{width:100%;max-width:620px;display:flex;flex-direction:column;align-items:center;gap:12px}
-.word{font-size:3rem;font-weight:700;color:var(--accent);padding:12px 18px;border-radius:12px;background:rgba(255,255,255,0.02)}
-.type-input{width:100%;max-width:520px;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);font-size:18px}
-.timer-wrap{width:100%;max-width:520px;height:12px;background:rgba(255,255,255,0.03);border-radius:8px;overflow:hidden}
-.timer-bar{height:100%;width:100%;background:linear-gradient(90deg,var(--accent),#62d2be);transform-origin:left;transition:width 0.12s linear}
+function nextWord() {
+  currentWord = words[Math.floor(Math.random() * words.length)];
+  wordEl.textContent = currentWord;
+}
 
-.hud{display:flex;gap:12px}
-#hud{display:flex;gap:12px;justify-content:center;width:100%;margin-bottom:8px}
-#score,#lives,#streak{background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600}
+function updateTime() {
+  time--;
+  timeEl.textContent = `Time: ${time}`;
+  if (time <= 0) {
+    clearInterval(timerInterval);
+    endGame();
+  }
+}
 
-.message{min-height:22px;color:var(--muted);font-size:14px}
-.buttons{display:flex;gap:8px;align-items:center}
-.leaderboard{max-height:220px;overflow:auto}
-.section{padding:8px 0}
-.section-head{display:flex;justify-content:space-between;align-items:center}
-.leaderboard .row{display:flex;justify-content:space-between;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);margin-bottom:8px}
-.words-sample{color:var(--muted);font-size:14px}
-.footer{text-align:center;padding:14px;color:var(--muted);font-size:13px}
+input.addEventListener('input', () => {
+  if (input.value.trim() === currentWord) {
+    score++;
+    scoreEl.textContent = `Score: ${score}`;
+    input.value = '';
+    nextWord();
+  }
+});
 
-/* responsive */
-@media (max-width:980px){
-  .stage{flex-direction:column;padding:12px}
-  .side-panel{width:100%}
+function endGame() {
+  input.disabled = true;
+  wordEl.textContent = `Time's up! Final Score: ${score}`;
+  restartBtn.style.display = 'inline-block';
+}
+
+function restartGame() {
+  input.value = '';
+  startGame();
+}
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
