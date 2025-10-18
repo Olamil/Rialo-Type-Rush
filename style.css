@@ -1,90 +1,76 @@
-const rialoWords = [
-  "rialo","rialoverse","rialochain","rialowallet","rialobridge","rialoscan","rialotx","rialocredits","rialopass","rialobuilder",
-  "rialofriends","rialoairdrop","rialodev","rialotreasury","rialoguild","rialospace","rialohub","rialonetwork","rialoalpha","rialocore",
-  "rialostake","rialopool","rialofund","rialobase","rialogrow","rialodrop","rialotool","rialogm","rialogn","rialonft","rialomint",
-  "rialoswap","rialobridgein","rialobridgeout","buildonrialo","rialobuilderdao","rialobull","rialobear","rialorelay","rialonode",
-  "rialohash","rialoblock","rialomodule","rialorollup","rialoproof","rialosign","rialoconnect","rialopower","rialolink","rialospeed","rialosig","rialosquad"
-];
-
-const web3Words = [
-  "blockchain","onchain","wallet","address","transaction","token","mint","bridge","layer1","layer2","gas",
-  "smartcontract","validator","hash","node","block","network","protocol","mainnet","testnet","faucet","explorer",
-  "airdrop","staking","yield","defi","dapp","dao","multisig","signature","zk","proof","evm","gasless","signer",
-  "liquidity","stablecoin","swap","pool","tokenomics","governance","rollup","sequencer","walletconnect","metamask",
-  "rpc","chainid","builder","permissionless","composability","wagmi","hodl"
-];
-
-let words = [];
-let currentWord;
-let score = 0;
-let time = 0;
-let timerInterval;
-
-const wordEl = document.getElementById('word');
-const input = document.getElementById('input');
-const scoreEl = document.getElementById('score');
-const timeEl = document.getElementById('time');
-const startBtn = document.getElementById('start-btn');
-const restartBtn = document.getElementById('restart-btn');
-
-function setTime(seconds) {
-  time = seconds;
-  timeEl.textContent = `Time: ${time}`;
+body {
+  background: #0A0E2A;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-function startGame() {
-  score = 0;
-  words = shuffle([...rialoWords, ...web3Words]);
-  input.value = '';
-  input.disabled = false;
-  input.focus();
-  scoreEl.textContent = `Score: 0`;
-  setTime(time || 30);
-  nextWord();
-  clearInterval(timerInterval);
-  timerInterval = setInterval(updateTime, 1000);
-  startBtn.style.display = 'none';
-  restartBtn.style.display = 'none';
+.game-container {
+  text-align: center;
+  background: #11163d;
+  padding: 30px;
+  border-radius: 10px;
+  width: 350px;
+  box-shadow: 0 0 15px #00E0FF;
 }
 
-function nextWord() {
-  currentWord = words[Math.floor(Math.random() * words.length)];
-  wordEl.textContent = currentWord;
+h1 {
+  color: #00E0FF;
+  margin-bottom: 20px;
 }
 
-function updateTime() {
-  time--;
-  timeEl.textContent = `Time: ${time}`;
-  if (time <= 0) {
-    clearInterval(timerInterval);
-    endGame();
-  }
+.settings {
+  margin-bottom: 15px;
 }
 
-input.addEventListener('input', () => {
-  if (input.value.trim() === currentWord) {
-    score++;
-    scoreEl.textContent = `Score: ${score}`;
-    input.value = '';
-    nextWord();
-  }
-});
-
-function endGame() {
-  input.disabled = true;
-  wordEl.textContent = `Time's up! Final Score: ${score}`;
-  restartBtn.style.display = 'inline-block';
+.time-btn {
+  background: #00E0FF;
+  color: #0A0E2A;
+  border: none;
+  padding: 8px 12px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
-function restartGame() {
-  input.value = '';
-  startGame();
+.word-display {
+  font-size: 28px;
+  margin: 20px 0;
+  min-height: 40px;
 }
 
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
+#input {
+  width: 80%;
+  padding: 10px;
+  font-size: 18px;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+#start-btn, #restart-btn {
+  background: #00E0FF;
+  color: #0A0E2A;
+  border: none;
+  padding: 10px 15px;
+  margin-top: 15px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
 }
