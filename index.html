@@ -2,27 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rialo Typing Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Rialo Typing Game</h1>
-  
-  <div id="time-buttons">
-    <button onclick="setTime(15)">15s</button>
-    <button onclick="setTime(30)">30s</button>
-    <button onclick="setTime(60)">60s</button>
+  <div class="game-container">
+    <h1>Rialo Typing Game</h1>
+    <div class="settings">
+      <button class="time-btn" data-time="15">15s</button>
+      <button class="time-btn" data-time="30">30s</button>
+      <button class="time-btn" data-time="60">60s</button>
+    </div>
+    <div class="word-display" id="word"></div>
+    <input type="text" id="input" placeholder="Type the word..." autocomplete="off" />
+    <div class="stats">
+      <p>⏳ Time: <span id="time">0</span>s</p>
+      <p>🏆 Score: <span id="score">0</span></p>
+    </div>
+    <button id="start-btn">Start Game</button>
+    <div id="end-screen" class="hidden">
+      <h2>Game Over</h2>
+      <p>Your Score: <span id="final-score"></span></p>
+      <button id="restart-btn">Play Again</button>
+    </div>
   </div>
-
-  <div id="word"></div>
-  <input type="text" id="input" disabled placeholder="Type here..." />
-  
-  <div id="score">Score: 0</div>
-  <div id="time">Time: 0</div>
-  
-  <button id="start-btn" onclick="startGame()">Start Game</button>
-  <button id="restart-btn" onclick="restartGame()" style="display:none;">Play Again</button>
-
   <script src="script.js"></script>
 </body>
 </html>
