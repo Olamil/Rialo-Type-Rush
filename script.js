@@ -1,88 +1,84 @@
-const wordEl = document.getElementById('word');
-const inputEl = document.getElementById('input');
-const timeEl = document.getElementById('time');
-const scoreEl = document.getElementById('score');
-const startBtn = document.getElementById('start-btn');
-const restartBtn = document.getElementById('restart-btn');
-const endScreen = document.getElementById('end-screen');
-const finalScore = document.getElementById('final-score');
-const timeBtns = document.querySelectorAll('.time-btn');
-
-let words = [
-  // Rialo words (50)
-  "Rialo","Bridge","Events","Smart","Flows","Node","Onchain","Trigger","Automation","Ecosystem",
-  "Rialoverse","Mission","Logs","Board","Web3","Dashboard","AI","Oracles","Chain","Task",
-  "Earn","Rewards","Game","RialoMap","Bot","Portal","Module","Level","Progress","Route",
-  "Automate","BridgeNode","Flow","Quest","Zap","TriggerNode","Signals","Connect","Wallet","MissionLog",
-  "Leaderboard","RialoBot","Execution","RialoTrigger","Action","RialoChain","RialoZone","AIFlow","BridgeFlow","ZapNode",
-  
-  // Web3 words (50)
-  "Blockchain","Wallet","DeFi","NFT","DAO","Token","Crypto","Web3","Metaverse","SmartContract",
-  "Layer1","Layer2","Bridge","Gas","Validator","Staking","DEX","Onchain","Airdrop","Mining",
-  "Hash","WalletConnect","Liquidity","DEX","RPC","Node","Address","PrivateKey","Security","Governance",
-  "Interoperability","Transaction","Protocol","Vault","Aggregator","Lending","Borrow","StakingPool","Rewards","DApp",
-  "Bridge","Crosschain","APY","Yield","BridgeProtocol","StakingNode","GovernanceToken","ZK","Rollup","Interchain"
+const rialoWords = [
+  "Rialo", "Bridge", "Event", "Action", "Node", "Relay", "Trigger", "Flow", "Message", "Data",
+  "Layer", "Connector", "Stream", "Link", "BridgeNet", "Sync", "Pulse", "Command", "Echo", "Signal",
+  "Speed", "Token", "Orbit", "Transit", "Network", "EventHub", "Meta", "Block", "Route", "Port",
+  "EventKey", "StreamLink", "Pathway", "Flash", "Core", "PulseNet", "Switch", "Connect", "Anchor", "Zero",
+  "Beacon", "RialoX", "Loop", "Portal", "Edge", "RouteX", "Netlink", "Chain", "RelayNode", "Snap"
 ];
 
-let time = 0;
-let score = 0;
-let timer;
-let gameRunning = false;
+const web3Words = [
+  "Wallet", "Smart", "Contract", "DeFi", "NFT", "DAO", "Gas", "Onchain", "EVM", "Bridge",
+  "ZK", "Layer2", "Dapp", "Stablecoin", "Token", "Yield", "Swap", "Ledger", "Stake", "Miner",
+  "Node", "RPC", "Explorer", "Vault", "Bridge", "Rollup", "WalletConnect", "Hash", "Signer", "Transaction",
+  "Mempool", "Account", "Decentralized", "Network", "Permissionless", "Liquidity", "Keypair", "Seed", "Airdrop", "Faucet",
+  "Mainnet", "Testnet", "Bridge", "Validator", "Slashing", "Gasless", "BridgeRoute", "ABI", "Web3", "OPCode"
+];
 
-function randomWord() {
+const words = [...rialoWords, ...web3Words];
+let currentWord = "";
+let score = 0;
+let timeLeft = 0;
+let timer = null;
+
+const wordEl = document.getElementById("word");
+const inputEl = document.getElementById("input");
+const scoreEl = document.getElementById("score");
+const timeEl = document.getElementById("time");
+const startBtn = document.getElementById("start-btn");
+const restartBtn = document.getElementById("restart-btn");
+
+function setTime(seconds) {
+  timeLeft = seconds;
+  timeEl.textContent = `Time: ${timeLeft}`;
+}
+
+function getRandomWord() {
   return words[Math.floor(Math.random() * words.length)];
 }
 
-function startGame(selectedTime) {
-  time = selectedTime;
+function displayNewWord() {
+  currentWord = getRandomWord();
+  wordEl.textContent = currentWord;
+}
+
+function startGame() {
+  if (timeLeft === 0) setTime(30); // default time
   score = 0;
-  gameRunning = true;
-  startBtn.classList.add('hidden');
-  endScreen.classList.add('hidden');
-  inputEl.value = '';
+  scoreEl.textContent = `Score: ${score}`;
+  inputEl.value = "";
+  inputEl.disabled = false;
   inputEl.focus();
-  scoreEl.textContent = score;
-  timeEl.textContent = time;
-  wordEl.textContent = randomWord();
+  startBtn.style.display = "none";
+  restartBtn.style.display = "none";
+  displayNewWord();
 
   timer = setInterval(() => {
-    time--;
-    timeEl.textContent = time;
-    if (time === 0) endGame();
+    timeLeft--;
+    timeEl.textContent = `Time: ${timeLeft}`;
+    if (timeLeft <= 0) endGame();
   }, 1000);
+
+  inputEl.addEventListener("input", checkInput);
 }
 
 function checkInput() {
-  if (inputEl.value.trim() === wordEl.textContent) {
+  if (inputEl.value.trim() === currentWord) {
     score++;
-    scoreEl.textContent = score;
-    inputEl.value = '';
-    wordEl.textContent = randomWord();
+    scoreEl.textContent = `Score: ${score}`;
+    inputEl.value = "";
+    displayNewWord();
   }
 }
 
 function endGame() {
   clearInterval(timer);
-  gameRunning = false;
-  finalScore.textContent = score;
-  endScreen.classList.remove('hidden');
-  startBtn.classList.remove('hidden');
+  inputEl.disabled = true;
+  wordEl.textContent = "Time's up!";
+  restartBtn.style.display = "inline-block";
 }
 
-inputEl.addEventListener('input', checkInput);
-
-timeBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const selected = parseInt(btn.getAttribute('data-time'));
-    startGame(selected);
-  });
-});
-
-restartBtn.addEventListener('click', () => {
-  endScreen.classList.add('hidden');
-  startBtn.classList.remove('hidden');
-});
-
-startBtn.addEventListener('click', () => {
-  inputEl.focus();
-});
+function restartGame() {
+  inputEl.disabled = false;
+  setTime(30);
+  startGame();
+}
