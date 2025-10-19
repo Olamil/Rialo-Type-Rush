@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -6,97 +8,87 @@
 }
 
 body {
-  background: url('rialo-logo.png') no-repeat center center fixed;
-  background-size: cover;
+  background-color: #0c0f0c;  /* Rialo dark */
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  color: #fff;
 }
 
-.game-container {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 30px;
-  border-radius: 15px;
+.game {
   text-align: center;
-  width: 90%;
-  max-width: 500px;
-  color: white;
+  max-width: 400px;
+  width: 100%;
 }
 
-.header {
+h1 {
+  font-size: 2.5rem;
+  color: #00f7b6; /* Rialo accent */
+  margin-bottom: 0.4rem;
+}
+
+p {
+  color: #999;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.time-select button {
+  margin: 0.3rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid #00f7b6;
+  color: #00f7b6;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.time-select button:hover {
+  background-color: #00f7b6;
+  color: #000;
+}
+
+.word {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 1.5rem 0;
+}
+
+#input {
+  padding: 0.7rem;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  font-size: 1rem;
+  background: transparent;
+  border: 1px solid #00f7b6;
+  color: #fff;
+  outline: none;
+}
+
+.info {
+  margin-top: 1rem;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.9rem;
+  color: #999;
 }
 
-.header h1 {
-  color: #FFD700; /* Rialo gold */
-  font-size: 24px;
-}
-
-.timer {
-  font-size: 20px;
-  background: #FFD700;
-  color: black;
-  padding: 5px 15px;
-  border-radius: 8px;
-}
-
-.level-select button {
-  background: #FFD700;
-  color: black;
+#start-btn, #restart-btn {
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.5rem;
+  background-color: #00f7b6;
+  color: #000;
+  font-weight: 600;
   border: none;
-  margin: 10px 5px;
-  padding: 10px 20px;
-  border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
-.level-select button:hover {
-  background: #e6c200;
-}
-
-.word-box {
-  font-size: 24px;
-  margin: 30px 0;
-  min-height: 40px;
-}
-
-#input-box {
-  padding: 12px;
-  width: 80%;
-  font-size: 18px;
-  border: none;
-  border-radius: 8px;
-  outline: none;
-  text-align: center;
-}
-
-.score-board {
-  margin-top: 20px;
-  font-size: 18px;
-}
-
-.end-screen {
-  display: none;
-  margin-top: 20px;
-}
-
-.end-screen h2 {
-  font-size: 24px;
-  color: #FFD700;
-}
-
-.end-screen button {
-  background: #FFD700;
-  color: black;
-  padding: 10px 20px;
-  border: none;
-  margin-top: 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
+#start-btn:hover, #restart-btn:hover {
+  background-color: #00d69e;
 }
