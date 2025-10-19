@@ -1,21 +1,21 @@
 const rialoWords = [
-  "Rialo","Mint","Stake","Vault","Bridge","Yield","Earn","Gasless",
-  "Reward","Airdrop","Node","Protocol","Swap","Rialoverse","Power",
-  "Grail","Rialonaut","RialoHub","Genesis","Mainnet","Onchain",
-  "Flow","RialoFi","BridgeX","Merkle","Key","StakeX","Rise",
-  "Launch","Fuel","Pulse","Chain","Layer","Block","Minted",
-  "Whale","Flowkey","Boost","Edge","VaultX","Trade","SwapX",
-  "Surge","Map","Rift","Aura","Light","Glow","Root","Nova","Verse"
+  "Rialo", "Mint", "Stake", "Vault", "Bridge", "Yield", "Earn", "Gasless",
+  "Reward", "Airdrop", "Node", "Protocol", "Swap", "Rialoverse", "Power",
+  "Grail", "Rialonaut", "RialoHub", "Genesis", "Mainnet", "Onchain",
+  "Flow", "RialoFi", "BridgeX", "Merkle", "Key", "StakeX", "Rise",
+  "Launch", "Fuel", "Pulse", "Chain", "Layer", "Block", "Minted",
+  "Whale", "Flowkey", "Boost", "Edge", "VaultX", "Trade", "SwapX",
+  "Surge", "Map", "Rift", "Aura", "Light", "Glow", "Root", "Nova", "Verse"
 ];
 
 const web3Words = [
-  "Blockchain","DeFi","Wallet","NFT","Layer2","Staking","Bridge",
-  "Validator","Consensus","Contract","Yield","Stablecoin","DAO",
-  "DEX","Swap","Hash","Metaverse","Token","Airdrop","Mint","Gas",
-  "Node","Liquidity","Mainnet","Onchain","ZK","Rollup","BridgeX",
-  "Vault","Reward","Solidity","Rust","Launchpad","Key","Stake",
-  "Pulse","Chain","Block","Minted","Whale","Boost","Edge","VaultX",
-  "Trade","Surge","Map","Aura","Light","Glow","Nova","Verse"
+  "Blockchain", "DeFi", "Wallet", "NFT", "Layer2", "Staking", "Bridge",
+  "Validator", "Consensus", "Contract", "Yield", "Stablecoin", "DAO",
+  "DEX", "Swap", "Hash", "Metaverse", "Token", "Airdrop", "Mint", "Gas",
+  "Node", "Liquidity", "Mainnet", "Onchain", "ZK", "Rollup", "BridgeX",
+  "Vault", "Reward", "Solidity", "Rust", "Launchpad", "Key", "Stake",
+  "Pulse", "Chain", "Block", "Minted", "Whale", "Boost", "Edge", "VaultX",
+  "Trade", "Surge", "Map", "Aura", "Light", "Glow", "Nova", "Verse"
 ];
 
 const wordsContainer = document.getElementById('words-container');
