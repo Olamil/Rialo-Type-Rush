@@ -3,36 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rialo Typing</title>
+  <title>Rialo Typing Game</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="overlay"></div>
+  <div class="game-container">
+    <div class="header">
+      <h1>Rialo Typing Game</h1>
+      <div class="timer" id="timer">0s</div>
+    </div>
+
+    <div class="level-select">
+      <button onclick="startGame(15)">15s</button>
+      <button onclick="startGame(30)">30s</button>
+      <button onclick="startGame(60)">1min</button>
+    </div>
+
+    <div class="word-box" id="word-box"></div>
+
+    <input 
+      type="text" 
+      id="input-box" 
+      placeholder="Start typing..." 
+      disabled 
+      autocomplete="off"
+    />
+
+    <div class="score-board">
+      <span>Score: <span id="score">0</span></span>
+    </div>
+
+    <div class="end-screen" id="end-screen">
+      <h2>Time’s up!</h2>
+      <p>Your score: <span id="final-score"></span></p>
+      <button onclick="resetGame()">Play Again</button>
+    </div>
+  </div>
   
-  <header>
-    <div class="logo">RIALO</div>
-    <nav>
-      <a href="#">TYPING</a>
-      <a href="#">LEADERBOARD</a>
-      <span class="coming">COMING SOON</span>
-    </nav>
-  </header>
-
-  <main>
-    <div id="words-container" class="words-container"></div>
-    <div id="end-screen" class="end-screen">
-      <p class="finished">Game finished!</p>
-      <p>Press <span class="key">Tab</span> to play again</p>
-    </div>
-
-    <div class="timer-controls">
-      <button onclick="startGame(15)" class="active">15</button>
-      <button onclick="startGame(30)">30</button>
-      <button onclick="startGame(60)">60</button>
-      <button onclick="startGame(120)">120</button>
-    </div>
-  </main>
-
   <script src="script.js"></script>
 </body>
 </html>
