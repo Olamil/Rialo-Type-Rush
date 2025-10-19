@@ -7,20 +7,20 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="game-container">
+  <div class="game">
     <h1>RialoType</h1>
-    <p class="subtitle">Type fast. Stay sharp. Climb the board.</p>
+    <p>Type fast. Stay sharp. Climb the board.</p>
 
-    <div id="time-buttons">
+    <div class="time-select">
       <button onclick="setTime(15)">15s</button>
       <button onclick="setTime(30)">30s</button>
       <button onclick="setTime(60)">60s</button>
     </div>
 
-    <div id="word"></div>
+    <div id="word" class="word"></div>
     <input type="text" id="input" disabled placeholder="Type here..." />
 
-    <div class="stats">
+    <div class="info">
       <span id="score">Score: 0</span>
       <span id="time">Time: 0</span>
     </div>
