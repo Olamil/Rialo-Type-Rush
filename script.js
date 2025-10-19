@@ -1,85 +1,90 @@
 const rialoWords = [
-  "Rialo","Bridge","Event","Action","Node","Relay","Trigger","Flow","Message","Data",
-  "Layer","Connector","Stream","Link","BridgeNet","Sync","Pulse","Command","Echo","Signal",
-  "Speed","Token","Orbit","Transit","Network","EventHub","Meta","Block","Route","Port",
-  "EventKey","StreamLink","Pathway","Flash","Core","PulseNet","Switch","Connect","Anchor","Zero",
-  "Beacon","RialoX","Loop","Portal","Edge","RouteX","Netlink","Chain","RelayNode","Snap"
+  "Rialo", "Mint", "Stake", "Vault", "Bridge", "Yield", "Earn", "Gasless", 
+  "Reward", "Airdrop", "Node", "Protocol", "Swap", "Rialoverse", "Power",
+  "Grail", "Rialonaut", "RialoHub", "Genesis", "Mainnet", "Onchain", 
+  "Flow", "RialoFi", "BridgeX", "Merkle", "Key", "StakeX", "Rise", 
+  "Launch", "Fuel", "Pulse", "Chain", "Layer", "Block", "Minted", 
+  "Whale", "Flowkey", "Boost", "Edge", "VaultX", "Trade", "SwapX",
+  "Surge", "Map", "Rift", "Aura", "Light", "Glow", "Root", "Nova", "Verse"
 ];
 
 const web3Words = [
-  "Wallet","Smart","Contract","DeFi","NFT","DAO","Gas","Onchain","EVM","Bridge",
-  "ZK","Layer2","Dapp","Stablecoin","Token","Yield","Swap","Ledger","Stake","Miner",
-  "Node","RPC","Explorer","Vault","Rollup","WalletConnect","Hash","Signer","Transaction",
-  "Mempool","Account","Decentralized","Network","Permissionless","Liquidity","Keypair","Seed","Airdrop","Faucet",
-  "Mainnet","Testnet","Validator","Slashing","Gasless","BridgeRoute","ABI","Web3","OPCode","Gwei"
+  "Blockchain", "DeFi", "Wallet", "NFT", "Layer2", "Staking", "Bridge",
+  "Validator", "Consensus", "Contract", "Yield", "Stablecoin", "DAO",
+  "DEX", "Swap", "Hash", "Metaverse", "Token", "Airdrop", "Mint", "Gas",
+  "Node", "Liquidity", "Mainnet", "Onchain", "ZK", "Rollup", "BridgeX",
+  "Vault", "Reward", "Solidity", "Rust", "Launchpad", "Key", "Stake",
+  "Pulse", "Chain", "Block", "Minted", "Whale", "Boost", "Edge", "VaultX",
+  "Trade", "Surge", "Map", "Aura", "Light", "Glow", "Nova", "Verse"
 ];
 
-const words = [...rialoWords, ...web3Words];
-
+let words = [];
 let currentWord = "";
 let score = 0;
-let timeLeft = 0;
-let timer = null;
+let time = 0;
+let timerInterval;
 
-const wordEl = document.getElementById("word");
-const inputEl = document.getElementById("input");
-const scoreEl = document.getElementById("score");
-const timeEl = document.getElementById("time");
-const startBtn = document.getElementById("start-btn");
-const restartBtn = document.getElementById("restart-btn");
+const wordBox = document.getElementById("word-box");
+const inputBox = document.getElementById("input-box");
+const scoreDisplay = document.getElementById("score");
+const timerDisplay = document.getElementById("timer");
+const endScreen = document.getElementById("end-screen");
+const finalScore = document.getElementById("final-score");
 
-function setTime(seconds) {
-  timeLeft = seconds;
-  timeEl.textContent = `Time: ${timeLeft}`;
-}
-
-function getRandomWord() {
-  return words[Math.floor(Math.random() * words.length)];
-}
-
-function displayNewWord() {
-  currentWord = getRandomWord();
-  wordEl.textContent = currentWord;
-}
-
-function startGame() {
-  if (timeLeft === 0) setTime(30);
+function startGame(selectedTime) {
   score = 0;
-  scoreEl.textContent = `Score: ${score}`;
-  inputEl.value = "";
-  inputEl.disabled = false;
-  inputEl.focus();
-  startBtn.style.display = "none";
-  restartBtn.style.display = "none";
-  displayNewWord();
+  time = selectedTime;
+  words = shuffle([...rialoWords, ...web3Words]);
+  inputBox.value = "";
+  inputBox.disabled = false;
+  endScreen.style.display = "none";
+  inputBox.focus();
+  scoreDisplay.textContent = score;
+  timerDisplay.textContent = `${time}s`;
+  nextWord();
 
-  timer = setInterval(() => {
-    timeLeft--;
-    timeEl.textContent = `Time: ${timeLeft}`;
-    if (timeLeft <= 0) endGame();
+  timerInterval = setInterval(() => {
+    time--;
+    timerDisplay.textContent = `${time}s`;
+    if (time <= 0) {
+      clearInterval(timerInterval);
+      endGame();
+    }
   }, 1000);
-
-  inputEl.addEventListener("input", checkInput);
 }
 
-function checkInput() {
-  if (inputEl.value.trim() === currentWord) {
+function nextWord() {
+  if (words.length === 0) words = shuffle([...rialoWords, ...web3Words]);
+  currentWord = words.pop();
+  wordBox.textContent = currentWord;
+}
+
+inputBox.addEventListener("input", () => {
+  if (inputBox.value.trim() === currentWord) {
     score++;
-    scoreEl.textContent = `Score: ${score}`;
-    inputEl.value = "";
-    displayNewWord();
+    scoreDisplay.textContent = score;
+    inputBox.value = "";
+    nextWord();
   }
-}
+});
 
 function endGame() {
-  clearInterval(timer);
-  inputEl.disabled = true;
-  wordEl.textContent = "Time's up!";
-  restartBtn.style.display = "inline-block";
+  inputBox.disabled = true;
+  endScreen.style.display = "block";
+  finalScore.textContent = score;
 }
 
-function restartGame() {
-  inputEl.disabled = false;
-  setTime(30);
-  startGame();
+function resetGame() {
+  clearInterval(timerInterval);
+  score = 0;
+  timerDisplay.textContent = "0s";
+  scoreDisplay.textContent = "0";
+  inputBox.value = "";
+  inputBox.disabled = true;
+  wordBox.textContent = "";
+  endScreen.style.display = "none";
+}
+
+function shuffle(array) {
+  return array.sort(() => Math.random() - 0.5);
 }
