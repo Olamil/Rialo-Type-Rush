@@ -13,9 +13,9 @@ body {
 }
 
 .overlay {
-  background: url('rialo-bg.jpeg') no-repeat center center fixed;
-  background-size: cover;
-  opacity: 0.15;
+  background: url('rialo-logo.png') no-repeat center center fixed;
+  background-size: contain;
+  opacity: 0.05; /* faint logo like Irys background */
   position: absolute;
   top: 0;
   left: 0;
@@ -33,18 +33,13 @@ header {
   align-items: center;
   padding: 25px 40px;
   z-index: 2;
+  background: transparent;
 }
 
 .logo {
   font-size: 32px;
   font-weight: 800;
   color: #FFD700; /* Rialo gold */
-  letter-spacing: 1px;
-}
-
-nav {
-  display: flex;
-  align-items: center;
 }
 
 nav a {
@@ -64,20 +59,9 @@ nav .coming {
   font-size: 16px;
 }
 
-.wallet-button {
-  background: #fff;
-  color: #000;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 15px;
-}
-
 main {
   position: relative;
-  top: 45%;
+  top: 40%;
   transform: translateY(-50%);
   text-align: center;
   z-index: 2;
@@ -131,41 +115,25 @@ main {
 
 .timer-controls {
   margin-top: 40px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #111;
-  padding: 10px 15px;
-  border-radius: 40px;
-}
-
-.timer-label {
-  background: #FFD700;
-  color: #000;
-  padding: 5px 10px;
-  border-radius: 25px;
-  font-size: 14px;
-  font-weight: 600;
 }
 
 .timer-controls button {
-  background: transparent;
-  color: #fff;
+  background: #FFD700;
+  color: #000;
   border: none;
-  margin: 0 5px;
-  padding: 8px 12px;
-  border-radius: 25px;
+  margin: 0 10px;
+  padding: 10px 15px;
+  border-radius: 50px;
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .timer-controls button.active {
-  background: #FFD700;
+  background: #fff;
   color: #000;
 }
 
 .timer-controls button:hover {
-  background: #FFD700;
-  color: #000;
+  background: #e6c200;
 }
