@@ -1,20 +1,21 @@
 const rialoWords = [
-  "Rialo", "Bridge", "Event", "Action", "Node", "Relay", "Trigger", "Flow", "Message", "Data",
-  "Layer", "Connector", "Stream", "Link", "BridgeNet", "Sync", "Pulse", "Command", "Echo", "Signal",
-  "Speed", "Token", "Orbit", "Transit", "Network", "EventHub", "Meta", "Block", "Route", "Port",
-  "EventKey", "StreamLink", "Pathway", "Flash", "Core", "PulseNet", "Switch", "Connect", "Anchor", "Zero",
-  "Beacon", "RialoX", "Loop", "Portal", "Edge", "RouteX", "Netlink", "Chain", "RelayNode", "Snap"
+  "Rialo","Bridge","Event","Action","Node","Relay","Trigger","Flow","Message","Data",
+  "Layer","Connector","Stream","Link","BridgeNet","Sync","Pulse","Command","Echo","Signal",
+  "Speed","Token","Orbit","Transit","Network","EventHub","Meta","Block","Route","Port",
+  "EventKey","StreamLink","Pathway","Flash","Core","PulseNet","Switch","Connect","Anchor","Zero",
+  "Beacon","RialoX","Loop","Portal","Edge","RouteX","Netlink","Chain","RelayNode","Snap"
 ];
 
 const web3Words = [
-  "Wallet", "Smart", "Contract", "DeFi", "NFT", "DAO", "Gas", "Onchain", "EVM", "Bridge",
-  "ZK", "Layer2", "Dapp", "Stablecoin", "Token", "Yield", "Swap", "Ledger", "Stake", "Miner",
-  "Node", "RPC", "Explorer", "Vault", "Bridge", "Rollup", "WalletConnect", "Hash", "Signer", "Transaction",
-  "Mempool", "Account", "Decentralized", "Network", "Permissionless", "Liquidity", "Keypair", "Seed", "Airdrop", "Faucet",
-  "Mainnet", "Testnet", "Bridge", "Validator", "Slashing", "Gasless", "BridgeRoute", "ABI", "Web3", "OPCode"
+  "Wallet","Smart","Contract","DeFi","NFT","DAO","Gas","Onchain","EVM","Bridge",
+  "ZK","Layer2","Dapp","Stablecoin","Token","Yield","Swap","Ledger","Stake","Miner",
+  "Node","RPC","Explorer","Vault","Rollup","WalletConnect","Hash","Signer","Transaction",
+  "Mempool","Account","Decentralized","Network","Permissionless","Liquidity","Keypair","Seed","Airdrop","Faucet",
+  "Mainnet","Testnet","Validator","Slashing","Gasless","BridgeRoute","ABI","Web3","OPCode","Gwei"
 ];
 
 const words = [...rialoWords, ...web3Words];
+
 let currentWord = "";
 let score = 0;
 let timeLeft = 0;
@@ -42,7 +43,7 @@ function displayNewWord() {
 }
 
 function startGame() {
-  if (timeLeft === 0) setTime(30); // default time
+  if (timeLeft === 0) setTime(30);
   score = 0;
   scoreEl.textContent = `Score: ${score}`;
   inputEl.value = "";
