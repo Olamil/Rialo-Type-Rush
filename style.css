@@ -6,97 +6,166 @@
 }
 
 body {
-  background: url('rialo-logo.png') no-repeat center center fixed;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: #000;
+  color: #fff;
   height: 100vh;
+  overflow: hidden;
 }
 
-.game-container {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 30px;
-  border-radius: 15px;
-  text-align: center;
-  width: 90%;
-  max-width: 500px;
-  color: white;
+.overlay {
+  background: url('rialo-bg.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  opacity: 0.15;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
-.header {
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 25px 40px;
+  z-index: 2;
 }
 
-.header h1 {
+.logo {
+  font-size: 32px;
+  font-weight: 800;
   color: #FFD700; /* Rialo gold */
-  font-size: 24px;
+  letter-spacing: 1px;
 }
 
-.timer {
-  font-size: 20px;
-  background: #FFD700;
-  color: black;
-  padding: 5px 15px;
-  border-radius: 8px;
+nav {
+  display: flex;
+  align-items: center;
 }
 
-.level-select button {
-  background: #FFD700;
-  color: black;
-  border: none;
-  margin: 10px 5px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 20px;
+  font-size: 18px;
   transition: 0.3s;
 }
 
-.level-select button:hover {
-  background: #e6c200;
-}
-
-.word-box {
-  font-size: 24px;
-  margin: 30px 0;
-  min-height: 40px;
-}
-
-#input-box {
-  padding: 12px;
-  width: 80%;
-  font-size: 18px;
-  border: none;
-  border-radius: 8px;
-  outline: none;
-  text-align: center;
-}
-
-.score-board {
-  margin-top: 20px;
-  font-size: 18px;
-}
-
-.end-screen {
-  display: none;
-  margin-top: 20px;
-}
-
-.end-screen h2 {
-  font-size: 24px;
+nav a:hover {
   color: #FFD700;
 }
 
-.end-screen button {
-  background: #FFD700;
-  color: black;
-  padding: 10px 20px;
-  border: none;
-  margin-top: 15px;
-  border-radius: 8px;
-  cursor: pointer;
+nav .coming {
+  color: #666;
   font-size: 16px;
+}
+
+.wallet-button {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+main {
+  position: relative;
+  top: 45%;
+  transform: translateY(-50%);
+  text-align: center;
+  z-index: 2;
+}
+
+.words-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.word {
+  font-size: 26px;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.word.active {
+  opacity: 1;
+  color: #FFD700;
+}
+
+.word.correct {
+  color: #32cd32;
+}
+
+.word.incorrect {
+  color: #e63946;
+}
+
+.end-screen {
+  margin-top: 40px;
+  display: none;
+}
+
+.end-screen .finished {
+  color: #32cd32;
+  font-size: 20px;
+}
+
+.end-screen .key {
+  padding: 2px 6px;
+  background: #333;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.timer-controls {
+  margin-top: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #111;
+  padding: 10px 15px;
+  border-radius: 40px;
+}
+
+.timer-label {
+  background: #FFD700;
+  color: #000;
+  padding: 5px 10px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.timer-controls button {
+  background: transparent;
+  color: #fff;
+  border: none;
+  margin: 0 5px;
+  padding: 8px 12px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.timer-controls button.active {
+  background: #FFD700;
+  color: #000;
+}
+
+.timer-controls button:hover {
+  background: #FFD700;
+  color: #000;
 }
